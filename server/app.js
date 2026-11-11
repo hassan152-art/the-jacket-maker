@@ -53,7 +53,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Static files for uploaded images
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+const uploadStaticDir = process.env.VERCEL ? path.join('/tmp', 'uploads') : path.join(__dirname, 'uploads');
+try { if (!fs.existsSync(uploadStaticDir)) fs.mkdirSync(uploadStaticDir, { recursive: true }); } catch (_) {}
+app.use('/uploads', express.static(uploadStaticDir));
 
 // Middleware to ensure storage is ready for incoming requests
 app.use(async (req, res, next) => {
