@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "usr_admin_001",
+    "name": "Atelier Master (Admin)",
+    "email": "admin@thejacketmaker.pk",
+    "password": "$2b$10$zPFNlhjmTxPx0wOIL5FXe.RIFpMnaspGs8t83meZNSjB4uWz.YCRe",
+    "phone": "+92 300 1234567",
+    "city": "Lahore",
+    "address": "Artisan Workshop, Gulberg III",
+    "role": "admin",
+    "createdAt": "2026-10-27T18:16:18.350Z",
+    "updatedAt": "2026-10-27T18:16:18.351Z"
+  },
+  {
+    "_id": "usr_cust_002",
+    "name": "Umar Farooq",
+    "email": "umar@thejacketmaker.pk",
+    "password": "$2b$10$zPFNlhjmTxPx0wOIL5FXe.9P/x2BtkCNp9TQLuhjiERC6U2f/lslW",
+    "phone": "+92 321 9876543",
+    "city": "Karachi",
+    "address": "Defence Phase 6, Khayaban-e-Shahbaz",
+    "role": "customer",
+    "createdAt": "2026-10-27T18:16:18.351Z",
+    "updatedAt": "2026-10-27T18:16:18.351Z"
+  }
+]

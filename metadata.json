@@ -1,0 +1,8 @@
+{
+  "name": "The Jacket Maker Pakistan - Bespoke Leather Atelier & E-Commerce",
+  "description": "Luxury handcrafted bespoke leather jackets, custom studio, made-to-measure outerwear, and artisan leather goods crafted in Sialkot, Pakistan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

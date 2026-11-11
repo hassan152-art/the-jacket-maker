@@ -1,0 +1,35 @@
+[
+  {
+    "_id": "rev_001",
+    "product": "prod_001",
+    "name": "Hamza Tariq",
+    "rating": 5,
+    "title": "Finest leather jacket in Pakistan without a doubt!",
+    "comment": "The sheepskin feels butter-soft and the YKK brass hardware is top-tier. Tailoring is precision-cut. Delivery was swift to Islamabad.",
+    "fitFeedback": "True to Size",
+    "verifiedPurchase": true,
+    "createdAt": "2026-10-22T18:16:18.354Z"
+  },
+  {
+    "_id": "rev_002",
+    "product": "prod_001",
+    "name": "Ali Raza",
+    "rating": 5,
+    "title": "Custom fit option is a game changer",
+    "comment": "I sent my exact measurements (chest 42, sleeve 26) and it fits like a glove. Beautiful packaging too with dust bag.",
+    "fitFeedback": "True to Size",
+    "verifiedPurchase": true,
+    "createdAt": "2026-10-15T18:16:18.354Z"
+  },
+  {
+    "_id": "rev_003",
+    "product": "prod_002",
+    "name": "Saad Malik",
+    "rating": 5,
+    "title": "The distressed cowhide patina is gorgeous",
+    "comment": "Heavyweight, authentic moto jacket. You can smell the real leather straight out of the box. Highly recommended!",
+    "fitFeedback": "True to Size",
+    "verifiedPurchase": true,
+    "createdAt": "2026-10-07T18:16:18.354Z"
+  }
+]
