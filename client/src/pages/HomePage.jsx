@@ -23,6 +23,7 @@ import ProductCard from '../components/ProductCard';
 import { Reveal, RevealStagger, RevealItem, CountUp } from '../components/Reveal';
 import { Stars, imgFallback } from '../components/ui';
 import { useCurrency } from '../context/CurrencyContext';
+import { FALLBACK_PRODUCTS } from '../data/fallbackProducts';
 import api from '../services/api';
 
 const TABS = [
@@ -182,8 +183,8 @@ const HomePage = () => {
   const { scrollY } = useScroll();
   const heroImgY = useTransform(scrollY, [0, 700], [0, 90]);
   const heroImgScale = useTransform(scrollY, [0, 700], [1.05, 1.12]);
-    const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(FALLBACK_PRODUCTS);
+  const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState('All');
   const [activeFaq, setActiveFaq] = useState(null);
   const [activeSilhouette, setActiveSilhouette] = useState(0);

@@ -4,6 +4,7 @@ import { SlidersHorizontal, X, SearchX } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { Breadcrumbs, EmptyState, useBodyLock, useEscape } from '../components/ui';
 import { useCurrency } from '../context/CurrencyContext';
+import { FALLBACK_PRODUCTS } from '../data/fallbackProducts';
 import api from '../services/api';
 
 const CATEGORIES = ['All', 'Men', 'Women', 'Bags', 'Accessories'];
@@ -97,8 +98,8 @@ const FilterBody = ({ category, sub, min, max, setMin, setMax, update, clearAll,
 const ShopPage = () => {
   const [params, setParams] = useSearchParams();
   const { formatPrice } = useCurrency();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(FALLBACK_PRODUCTS);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
 
@@ -131,8 +132,37 @@ const ShopPage = () => {
     if (maxParam) q.maxPrice = maxParam;
     api
       .get('/products', { params: q })
-      .then((res) => alive && setProducts(res.data))
-      .catch(() => alive && setError(true))
+      .then((res) => {
+        if (alive && res.data && res.data.length > 0) {
+          setProducts(res.data);
+        } else if (alive) {
+          // Filter fallback products locally
+          let filtered = [...FALLBACK_PRODUCTS];
+          if (category !== 'All') filtered = filtered.filter(p => p.category === category);
+          if (sub) filtered = filtered.filter(p => p.subCategory === sub);
+          if (search) {
+            const s = search.toLowerCase();
+            filtered = filtered.filter(p => p.name.toLowerCase().includes(s) || p.description.toLowerCase().includes(s));
+          }
+          if (minParam) filtered = filtered.filter(p => p.pricePKR >= Number(minParam));
+          if (maxParam) filtered = filtered.filter(p => p.pricePKR <= Number(maxParam));
+          setProducts(filtered);
+        }
+      })
+      .catch(() => {
+        if (alive) {
+          let filtered = [...FALLBACK_PRODUCTS];
+          if (category !== 'All') filtered = filtered.filter(p => p.category === category);
+          if (sub) filtered = filtered.filter(p => p.subCategory === sub);
+          if (search) {
+            const s = search.toLowerCase();
+            filtered = filtered.filter(p => p.name.toLowerCase().includes(s) || p.description.toLowerCase().includes(s));
+          }
+          if (minParam) filtered = filtered.filter(p => p.pricePKR >= Number(minParam));
+          if (maxParam) filtered = filtered.filter(p => p.pricePKR <= Number(maxParam));
+          setProducts(filtered);
+        }
+      })
       .finally(() => alive && setLoading(false));
     return () => {
       alive = false;

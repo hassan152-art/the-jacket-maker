@@ -7,6 +7,7 @@ import { useCurrency } from '../context/CurrencyContext';
 import ProductCard from '../components/ProductCard';
 import SizeGuideModal from '../components/SizeGuideModal';
 import { Stars, Breadcrumbs, EmptyState, imgFallback } from '../components/ui';
+import { FALLBACK_PRODUCTS } from '../data/fallbackProducts';
 import api from '../services/api';
 
 const Accordion = ({ title, defaultOpen = false, children }) => {
@@ -87,7 +88,18 @@ const ProductDetailPage = () => {
           .then((r) => alive && setReviews(r.data))
           .catch(() => alive && setReviews([]));
       } catch (err) {
-        if (alive) setStatus(err.response?.status === 404 ? 'notfound' : 'error');
+        if (alive) {
+          const fallback = FALLBACK_PRODUCTS.find((p) => p.slug === slug);
+          if (fallback) {
+            setProduct(fallback);
+            setColor(fallback.colors?.[0]?.name || '');
+            setSize('');
+            setStatus('ok');
+            setRelated(FALLBACK_PRODUCTS.filter((p) => p.slug !== slug).slice(0, 4));
+          } else {
+            setStatus(err.response?.status === 404 ? 'notfound' : 'error');
+          }
+        }
       }
     })();
     return () => {
